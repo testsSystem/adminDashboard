@@ -12,16 +12,16 @@ import { useQuery } from "react-query";
 
 const columns = [
   { Header: "title", accessor: "title", width: "45%", align: "left" },
-  { Header: "category", accessor: "category", align: "left" },
-  { Header: "location", accessor: "location", align: "center" },
-  { Header: "actions", accessor: "actions", align: "center" },
+  { Header: "input", accessor: "input", align: "left" },
+  //   { Header: "location", accessor: "location", align: "center" },
+  //   { Header: "actions", accessor: "actions", align: "center" },
 ];
 // const row = [];
 
-function Places() {
+function TestData() {
   const [rows, setRows] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/users").then((response) => {
+    fetch("http://localhost:3000/api/v1").then((response) => {
       response.json().then((places) => {
         const allPlaces = places.data.map((place) => {
           return {
@@ -110,4 +110,4 @@ function Places() {
   );
 }
 
-export default Places;
+export default TestData;

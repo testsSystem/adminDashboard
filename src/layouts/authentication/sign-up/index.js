@@ -29,10 +29,51 @@ import MDButton from "components/MDButton";
 // Authentication layout components
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 // Images
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 
 function Cover() {
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const firstnameRef = useRef(null);
+  const lastnameRef = useRef(null);
+  const navigate = useNavigate();
+
+  const sigInstructorUp = () => {
+    const firstName =
+      firstnameRef.current.querySelector("input[type=text]").value;
+    const lastName =
+      lastnameRef.current.querySelector("input[type=text]").value;
+    const email = emailRef.current.querySelector("input[type=email]").value;
+    const password = passwordRef.current.querySelector(
+      "input[type=password]"
+    ).value;
+
+    fetch(`http://localhost:3000/api/v1/instructors/signup`, {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+        password,
+        firstName,
+        lastName,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        response.json().then((signup) => {
+          if (signup) {
+            console.log(signup);
+            navigate("/dashboard");
+          }
+        });
+      })
+      .catch((e) => e);
+  };
+
   return (
     <CoverLayout image={bgImage}>
       <Card>
@@ -57,15 +98,42 @@ function Cover() {
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput type="text" label="Name" variant="standard" fullWidth />
+              <MDInput
+                type="text"
+                label="First Name"
+                variant="standard"
+                fullWidth
+                ref={firstnameRef}
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" variant="standard" fullWidth />
+              <MDInput
+                type="text"
+                label="Last Name"
+                variant="standard"
+                fullWidth
+                ref={lastnameRef}
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="password" label="Password" variant="standard" fullWidth />
+              <MDInput
+                type="email"
+                label="Email"
+                variant="standard"
+                fullWidth
+                ref={emailRef}
+              />
             </MDBox>
-            <MDBox display="flex" alignItems="center" ml={-1}>
+            <MDBox mb={2}>
+              <MDInput
+                type="password"
+                label="Password"
+                variant="standard"
+                fullWidth
+                ref={passwordRef}
+              />
+            </MDBox>
+            {/* <MDBox display="flex" alignItems="center" ml={-1}>
               <Checkbox />
               <MDTypography
                 variant="button"
@@ -85,13 +153,18 @@ function Cover() {
               >
                 Terms and Conditions
               </MDTypography>
-            </MDBox>
+            </MDBox> */}
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
-                sign in
+              <MDButton
+                variant="gradient"
+                color="info"
+                fullWidth
+                onClick={sigInstructorUp}
+              >
+                sign up
               </MDButton>
             </MDBox>
-            <MDBox mt={3} mb={1} textAlign="center">
+            {/* <MDBox mt={3} mb={1} textAlign="center">
               <MDTypography variant="button" color="text">
                 Already have an account?{" "}
                 <MDTypography
@@ -105,7 +178,7 @@ function Cover() {
                   Sign In
                 </MDTypography>
               </MDTypography>
-            </MDBox>
+            </MDBox> */}
           </MDBox>
         </MDBox>
       </Card>
