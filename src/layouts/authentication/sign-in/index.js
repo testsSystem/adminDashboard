@@ -58,6 +58,7 @@ function Basic() {
         response.json().then((loggedIn) => {
           console.log(loggedIn);
           if (loggedIn.success) {
+            console.log(loggedIn);
             ctx.login(loggedIn.token);
             navigate("/dashboard");
           }
