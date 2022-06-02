@@ -38,12 +38,13 @@ function Basic() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+
   const login = () => {
     const email = emailRef.current.querySelector("input[type=email]").value;
     const password = passwordRef.current.querySelector(
       "input[type=password]"
     ).value;
-    fetch(`http://localhost:3000/api/v1/instructors/login`, {
+    fetch(`http://localhost:3000/api/v1/users/login`, {
       method: "POST",
       body: JSON.stringify({
         email,
@@ -54,11 +55,10 @@ function Basic() {
       },
     })
       .then((response) => {
-        console.log(response, "llllllllllllllllllll");
         response.json().then((loggedIn) => {
-          console.log(loggedIn);
+          console.log("gjghgjh", loggedIn, "logedin");
           if (loggedIn.success) {
-            console.log(loggedIn);
+            console.log(loggedIn, "hiiiiiiiiiiiiiiii");
             ctx.login(loggedIn.token);
             navigate("/dashboard");
           }

@@ -10,7 +10,6 @@ import { useQuery } from "react-query";
 import MDInput from "components/MDInput";
 import TextField from "@mui/material/TextField";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
-import Questions from "./Questions";
 
 import FormControl, { useFormControl } from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -18,7 +17,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 
 // import { Category } from "@mui/icons-material";
 
-function TestData() {
+function ActiveUser() {
   //   useEffect(() => {
   //     fetch("http://localhost:3000/api/v1").then((response) => {
   //       response.json().then((places) => {
@@ -117,7 +116,6 @@ function TestData() {
           </Card>
         </MDBox>
         {/* <MDBox> */}
-        <Questions />
         {/* </MDBox> */}
 
         <Footer />
@@ -126,4 +124,4 @@ function TestData() {
   );
 }
 
-export default TestData;
+export default ActiveUser;
