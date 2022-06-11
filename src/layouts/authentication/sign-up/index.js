@@ -51,7 +51,7 @@ function Cover() {
       "input[type=password]"
     ).value;
 
-    fetch(`http://localhost:3000/api/v1/instructors/signup`, {
+    fetch(`http://localhost:3000/api/v1/users/signup`, {
       method: "POST",
       body: JSON.stringify({
         email,

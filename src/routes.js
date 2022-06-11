@@ -46,7 +46,7 @@ import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 // @mui icons
 import Icon from "@mui/material/Icon";
-import ActiveUser from "layouts/UsersOp/ActiveUser";
+import ActiveStudents from "layouts/UsersOp/ActiveStudents";
 
 const routes = [
   {
@@ -63,7 +63,7 @@ const routes = [
     key: "activeuser",
     icon: <Icon fontSize="small">quiz</Icon>,
     route: "/activeuser",
-    component: <ActiveUser />,
+    component: <ActiveStudents />,
   },
 
   {

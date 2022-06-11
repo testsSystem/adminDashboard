@@ -56,10 +56,11 @@ function Basic() {
     })
       .then((response) => {
         response.json().then((loggedIn) => {
-          console.log("gjghgjh", loggedIn, "logedin");
+          console.log("gjghgjh", loggedIn, "logedin", "llllllllllllllllll");
           if (loggedIn.success) {
+            window.localStorage.setItem("token", loggedIn.result);
             console.log(loggedIn, "hiiiiiiiiiiiiiiii");
-            ctx.login(loggedIn.token);
+            // ctx.login(loggedIn.result.token);
             navigate("/dashboard");
           }
         });
