@@ -11,11 +11,14 @@ import axios from "axios";
 import { useQueries } from "react-query";
 import MDButton from "components/MDButton";
 import ActiveInstructors from "./ActiveInstructors";
+import { useParams } from "react-router-dom";
 
 function ActiveStudents() {
   const [rows, setRows] = useState([]);
 
   const [studentHolder, setStudentHolder] = useState([]);
+  let [counter, setCounter] = useState(0);
+
   const [instructorsHolder, setInstructorsHolder] = useState([]);
 
   const columns = [
@@ -29,15 +32,6 @@ function ActiveStudents() {
 
     // { Header: "actions", accessor: "actions", align: "center" },
   ];
-  // const insColumns = [
-  //   {
-  //     Header: "Instructor",
-  //     accessor: "Instructor",
-  //     width: "50%",
-  //     align: "center",
-  //   },
-  //   // { Header: "actions", accessor: "actions", align: "center" },
-  // ];
 
   const fetchStudents = async () => {
     const token = window.localStorage.getItem("token") || null;
@@ -55,68 +49,70 @@ function ActiveStudents() {
     return data;
   };
 
-  const fetchInstructor = async () => {
+  const dataStatus = { status: true };
+
+  const updateStatus = async (id, status) => {
     const token = window.localStorage.getItem("token") || null;
 
     const data = await axios({
-      url: `http://localhost:3000/api/v1/users/instructors`,
+      url: `http://localhost:3000/api/v1/users/updateStatus/` + id,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,
       },
-      method: "GET",
+      data: {
+        status: !status,
+      },
+      method: "PUT",
     });
-    setInstructorsHolder(data);
-
+    // setStudentHolder(data);
     return data;
   };
 
   useEffect(() => {
     fetchStudents();
-    fetchInstructor();
-  }, []);
-  console.log(studentHolder?.data?.result);
-  console.log(instructorsHolder?.data?.result);
+    // updateStatus();
+  }, [counter]);
+  // console.log(studentHolder?.data?.result);
+  // console.log(instructorsHolder?.data?.result);
 
-  const [flag, setFlag] = useState(true);
-  const [stutus, setStatus] = useState(true);
+  const [isActive, setIsActive] = useState();
+  const [status, setStatus] = useState();
 
-  const handleClick = () => {
-    setFlag(!flag);
-    setStatus(!studentHolder?.data?.result?.status);
-  };
+  console.log(instructorsHolder?.data?.result[0], "Stttttsausssss");
 
   useEffect(() => {
     setRows(
       studentHolder?.data?.result
         ? studentHolder?.data?.result?.map((st, i) => {
+            setStatus(st.status);
+            // setIsActive(status);
+            console.log(st, "jjjjjjjjjjjjjjjj");
             return {
-              Students: <div key={i}>{st?.first_name}</div>,
+              Students: <div>{st?.first_name}</div>,
               Activation: (
                 <MDButton
+                  key={st.id}
                   variant="contained"
-                  color={flag ? "success" : "error"}
-                  onClick={handleClick}
+                  color={st.status ? "success" : "error"}
+                  onClick={() => {
+                    // setIsActive(!st.status);
+                    // setStatus(!status);
+                    updateStatus(st.id, st.status).then(() => {
+                      setCounter(counter++);
+                    });
+                    // setStatus(isActive);
+                  }}
                 >
-                  Active
+                  {console.log(status, "isssss")}
+                  {!st.status ? <h4>deActivate</h4> : <h4>Activate</h4>}
                 </MDButton>
               ),
             };
           })
         : []
     );
-    console.log(instructorsHolder?.result, "ooo");
-
-    // setInsRows(
-    //   instructorsHolder?.data?.result
-    //     ? instructorsHolder?.data?.result?.map((inst, i) => {
-    //         return {
-    //           Instructor: <div key={i}>{inst?.first_name}</div>,
-    //         };
-    //       })
-    //     : []
-    // );
-  }, [studentHolder, instructorsHolder]);
+  }, [studentHolder, isActive, status, counter]);
 
   return (
     <>

@@ -70,7 +70,7 @@ function ActiveInstructors() {
                   color={flag ? "success" : "error"}
                   onClick={handleClick}
                 >
-                  Active
+                  Activate
                 </MDButton>
               ),
             };
