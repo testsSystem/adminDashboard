@@ -24,6 +24,7 @@ import { Card } from "@mui/material";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import moment from "moment";
 
 function Dashboard() {
   const [info, setInfo] = useState([]);
@@ -105,7 +106,7 @@ function Dashboard() {
               <Grid item xs={12} md={4}>
                 <div>Created Date</div>
                 <br />
-                <div>{info.createdAt}</div>
+                <div>{moment(info.createdAt).format("YYYY/MM/DD")}</div>
               </Grid>
             </Grid>
           </MDBox>
