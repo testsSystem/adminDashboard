@@ -21,7 +21,7 @@ const columns = [
 function Places() {
   const [rows, setRows] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/users").then((response) => {
+    fetch("http://localhost:3000/api/v1/admin").then((response) => {
       response.json().then((places) => {
         const allPlaces = places.data.map((place) => {
           return {

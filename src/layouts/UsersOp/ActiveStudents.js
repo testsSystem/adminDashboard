@@ -23,21 +23,21 @@ function ActiveStudents() {
 
   const columns = [
     { Header: "Students", accessor: "Students", width: "50%", align: "center" },
+    { Header: "status", accessor: "status", align: "center" },
+
     {
       Header: "Activation",
       accessor: "Activation",
       width: "50%",
       align: "center",
     },
-
-    // { Header: "actions", accessor: "actions", align: "center" },
   ];
 
   const fetchStudents = async () => {
     const token = window.localStorage.getItem("token") || null;
 
     const data = await axios({
-      url: `http://localhost:3000/api/v1/users/allStudents`,
+      url: `http://localhost:3000/api/v1/admin/allStudents`,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,
@@ -55,7 +55,7 @@ function ActiveStudents() {
     const token = window.localStorage.getItem("token") || null;
 
     const data = await axios({
-      url: `http://localhost:3000/api/v1/users/updateStatus/` + id,
+      url: `http://localhost:3000/api/v1/admin/updateStatus/` + id,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,
@@ -79,33 +79,36 @@ function ActiveStudents() {
   const [isActive, setIsActive] = useState();
   const [status, setStatus] = useState();
 
-  console.log(instructorsHolder?.data?.result[0], "Stttttsausssss");
-
   useEffect(() => {
     setRows(
       studentHolder?.data?.result
         ? studentHolder?.data?.result?.map((st, i) => {
             setStatus(st.status);
             // setIsActive(status);
-            console.log(st, "jjjjjjjjjjjjjjjj");
+            console.log(st.status, "jjjjjjjjjjjjjjjj");
             return {
               Students: <div>{st?.first_name}</div>,
+              status: (
+                <div>
+                  {st.status ? <h4>activated</h4> : <h4>not activated</h4>}
+                </div>
+              ),
               Activation: (
                 <MDButton
                   key={st.id}
                   variant="contained"
-                  color={st.status ? "success" : "error"}
+                  color={st.status ? "error" : "success"}
                   onClick={() => {
                     // setIsActive(!st.status);
                     // setStatus(!status);
                     updateStatus(st.id, st.status).then(() => {
-                      setCounter(counter++);
+                      setCounter(++counter);
                     });
                     // setStatus(isActive);
                   }}
                 >
                   {console.log(status, "isssss")}
-                  {!st.status ? <h4>deActivate</h4> : <h4>Activate</h4>}
+                  {!st.status ? <h4>Activate</h4> : <h4>Deactivate</h4>}
                 </MDButton>
               ),
             };

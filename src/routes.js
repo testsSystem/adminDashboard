@@ -47,6 +47,7 @@ import SignUp from "layouts/authentication/sign-up";
 // @mui icons
 import Icon from "@mui/material/Icon";
 import ActiveStudents from "layouts/UsersOp/ActiveStudents";
+import SignOut from "layouts/authentication/sign-out";
 
 const routes = [
   {
@@ -56,6 +57,7 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     component: <Dashboard />,
+    inSideNav: true,
   },
   {
     type: "collapse",
@@ -64,6 +66,7 @@ const routes = [
     icon: <Icon fontSize="small">quiz</Icon>,
     route: "/activeuser",
     component: <ActiveStudents />,
+    inSideNav: true,
   },
 
   {
@@ -73,6 +76,7 @@ const routes = [
     icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",
     component: <SignIn />,
+    inSideNav: true,
   },
   {
     type: "collapse",
@@ -81,6 +85,16 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up",
     component: <SignUp />,
+    inSideNav: true,
+  },
+  {
+    type: "collapse",
+    name: "Log Out",
+    key: "log-out",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/authentication/log-out",
+    component: <SignOut />,
+    inSideNav: true,
   },
 ];
 

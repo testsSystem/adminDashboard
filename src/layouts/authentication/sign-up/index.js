@@ -51,7 +51,7 @@ function Cover() {
       "input[type=password]"
     ).value;
 
-    fetch(`http://localhost:3000/api/v1/users/signup`, {
+    fetch(`http://localhost:3000/api/v1/admin/signup`, {
       method: "POST",
       body: JSON.stringify({
         email,
@@ -130,27 +130,7 @@ function Cover() {
                 ref={passwordRef}
               />
             </MDBox>
-            {/* <MDBox display="flex" alignItems="center" ml={-1}>
-              <Checkbox />
-              <MDTypography
-                variant="button"
-                fontWeight="regular"
-                color="text"
-                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-              >
-                &nbsp;&nbsp;I agree the&nbsp;
-              </MDTypography>
-              <MDTypography
-                component="a"
-                href="#"
-                variant="button"
-                fontWeight="bold"
-                color="info"
-                textGradient
-              >
-                Terms and Conditions
-              </MDTypography>
-            </MDBox> */}
+
             <MDBox mt={4} mb={1}>
               <MDButton
                 variant="gradient"

@@ -44,7 +44,7 @@ function Basic() {
     const password = passwordRef.current.querySelector(
       "input[type=password]"
     ).value;
-    fetch(`http://localhost:3000/api/v1/users/login`, {
+    fetch(`http://localhost:3000/api/v1/admin/login`, {
       method: "POST",
       body: JSON.stringify({
         email,
@@ -157,21 +157,7 @@ function Basic() {
                 sign in
               </MDButton>
             </MDBox>
-            <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
-                Don&apos;t have an account?{" "}
-                <MDTypography
-                  component={Link}
-                  to="/authentication/sign-up"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                  textGradient
-                >
-                  Sign up
-                </MDTypography>
-              </MDTypography>
-            </MDBox>
+            <MDBox mt={3} mb={1} textAlign="center"></MDBox>
           </MDBox>
         </MDBox>
       </Card>

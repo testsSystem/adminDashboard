@@ -13,6 +13,7 @@ import MDButton from "components/MDButton";
 
 function ActiveInstructors() {
   const [rows, setRows] = useState([]);
+  let [counter, setCounter] = useState(0);
 
   const [instructorsHolder, setInstructorsHolder] = useState([]);
 
@@ -23,6 +24,7 @@ function ActiveInstructors() {
       width: "50%",
       align: "center",
     },
+    { Header: "status", accessor: "status", align: "center" },
     {
       Header: "Activation",
       accessor: "Activation",
@@ -35,7 +37,7 @@ function ActiveInstructors() {
     const token = window.localStorage.getItem("token") || null;
 
     const data = await axios({
-      url: `http://localhost:3000/api/v1/users/instructors`,
+      url: `http://localhost:3000/api/v1/admin/instructors`,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,
@@ -47,37 +49,71 @@ function ActiveInstructors() {
     return data;
   };
 
+  const updateStatus = async (id, status) => {
+    const token = window.localStorage.getItem("token") || null;
+
+    const data = await axios({
+      url: `http://localhost:3000/api/v1/admin/updateStatus/` + id,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token ? `Bearer ${token}` : undefined,
+      },
+      data: {
+        status: !status,
+      },
+      method: "PUT",
+    });
+    // setStudentHolder(data);
+    return data;
+  };
+
   useEffect(() => {
     fetchInstructor();
-  }, []);
-  console.log(instructorsHolder?.data?.result);
+    // updateStatus();
+  }, [counter]);
+  // console.log(studentHolder?.data?.result);
+  // console.log(instructorsHolder?.data?.result);
 
-  const [flag, setFlag] = useState(true);
-
-  const handleClick = () => {
-    setFlag(!flag);
-  };
+  const [isActive, setIsActive] = useState();
+  const [status, setStatus] = useState();
 
   useEffect(() => {
     setRows(
       instructorsHolder?.data?.result
         ? instructorsHolder?.data?.result?.map((st, i) => {
+            setStatus(st.status);
+            // setIsActive(status);
+            console.log(st.status, "jjjjjjjjjjjjjjjj");
             return {
-              Instructors: <div key={i}>{st?.first_name}</div>,
+              Instructors: <div>{st?.first_name}</div>,
+              status: (
+                <div>
+                  {st.status ? <h4>activated</h4> : <h4>not activated</h4>}
+                </div>
+              ),
               Activation: (
                 <MDButton
+                  key={st.id}
                   variant="contained"
-                  color={flag ? "success" : "error"}
-                  onClick={handleClick}
+                  color={st.status ? "error" : "success"}
+                  onClick={() => {
+                    // setIsActive(!st.status);
+                    // setStatus(!status);
+                    updateStatus(st.id, st.status).then(() => {
+                      setCounter(++counter);
+                    });
+                    // setStatus(isActive);
+                  }}
                 >
-                  Activate
+                  {console.log(status, "isssss")}
+                  {!st.status ? <h4>Activate</h4> : <h4>Deactivate</h4>}
                 </MDButton>
               ),
             };
           })
         : []
     );
-  }, [instructorsHolder]);
+  }, [instructorsHolder, isActive, status, counter]);
 
   return (
     <>
