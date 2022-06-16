@@ -6,9 +6,8 @@
 
 1. React Js
 2. React Router
-3. Redux
-4. Redux Thunk
-5. Material UI
+3. Material UI
+4. Context
 
 # Getting Started
 
