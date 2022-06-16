@@ -168,7 +168,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
       ownerState={{ transparentSidenav, whiteSidenav, miniSidenav, darkMode }}
     >
       <MDBox pt={3} pb={1} px={4} textAlign="center">
-        <MDBox
+        {/* <MDBox
           display={{ xs: "block", xl: "none" }}
           position="absolute"
           top={0}
@@ -198,14 +198,14 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
               {brandName}
             </MDTypography>
           </MDBox>
-        </MDBox>
+        </MDBox> */}
       </MDBox>
-      <Divider
+      {/* <Divider
         light={
           (!darkMode && !whiteSidenav && !transparentSidenav) ||
           (darkMode && !transparentSidenav && whiteSidenav)
         }
-      />
+      /> */}
       <List>{renderRoutes}</List>
       <MDBox p={2} mt="auto">
         {/* <MDButton

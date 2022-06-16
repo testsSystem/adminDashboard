@@ -89,7 +89,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Log Out",
+    name: "Sign Out",
     key: "log-out",
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/log-out",

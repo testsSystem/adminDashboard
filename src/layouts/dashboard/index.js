@@ -60,7 +60,7 @@ function Dashboard() {
       method: "GET",
     });
     setCountTests(data?.data?.result.length);
-    console.log(data?.data?.result?.length, "lengthhhhhhh");
+    // console.log(data, "lengthhhhhhh");
 
     return data;
   };
