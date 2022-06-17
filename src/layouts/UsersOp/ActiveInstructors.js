@@ -37,7 +37,7 @@ function ActiveInstructors() {
     const token = window.localStorage.getItem("token") || null;
 
     const data = await axios({
-      url: `http://localhost:3000/api/v1/admin/instructors`,
+      url: `https://logietestapi.herokuapp.com/api/v1/admin/instructors`,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,
@@ -53,7 +53,7 @@ function ActiveInstructors() {
     const token = window.localStorage.getItem("token") || null;
 
     const data = await axios({
-      url: `http://localhost:3000/api/v1/admin/updateStatus/` + id,
+      url: `https://logietestapi.herokuapp.com/api/v1/admin/updateStatus/` + id,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,
