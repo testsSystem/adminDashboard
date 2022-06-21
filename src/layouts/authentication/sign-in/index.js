@@ -44,7 +44,7 @@ function Basic() {
     const password = passwordRef.current.querySelector(
       "input[type=password]"
     ).value;
-    fetch(`https://logietestapi.herokuapp.com/api/v1//admin/login`, {
+    fetch(`https://logietestapi.herokuapp.com/api/v1/admin/login`, {
       method: "POST",
       body: JSON.stringify({
         email,
