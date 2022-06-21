@@ -43,7 +43,7 @@ function ActiveStudents() {
 
     const data = await axios({
       url: `
-        http://localhost:3000/api/v1/admin/instructors`,
+      https://logietestapi.herokuapp.com/api/v1/admin/instructors`,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,
@@ -60,7 +60,7 @@ function ActiveStudents() {
 
     const data = await axios({
       url: `
-        http://localhost:3000/api/v1/admin/allStudents`,
+      https://logietestapi.herokuapp.com/api/v1/admin/allStudents`,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,
@@ -119,7 +119,7 @@ function ActiveStudents() {
     const data = await axios({
       url:
         `
-      http://localhost:3000/api/v1/admin/updateStatus/` + id,
+        https://logietestapi.herokuapp.com/api/v1/admin/updateStatus/` + id,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,

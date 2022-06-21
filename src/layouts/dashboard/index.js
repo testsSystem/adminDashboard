@@ -35,8 +35,7 @@ function Dashboard() {
     const token = window.localStorage.getItem("token") || null;
 
     const data = await axios({
-      url: `
-      http://localhost:3000/api/v1/users/profile`,
+      url: `https://logietestapi.herokuapp.com/api/v1/users/profile`,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,
@@ -54,7 +53,7 @@ function Dashboard() {
 
     const data = await axios({
       url: `
-      http://localhost:3000/api/v1/admin/getAllTests`,
+      https://logietestapi.herokuapp.com/api/v1/admin/getAllTests`,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,

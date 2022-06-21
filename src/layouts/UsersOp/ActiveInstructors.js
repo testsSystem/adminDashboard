@@ -12,10 +12,6 @@ import { useQueries } from "react-query";
 import MDButton from "components/MDButton";
 
 function ActiveInstructors() {
-
-
-
-
   const [rows, setRows] = useState([]);
   let [counter, setCounter] = useState(0);
 
@@ -42,7 +38,7 @@ function ActiveInstructors() {
 
     const data = await axios({
       url: `
-      http://localhost:3000/api/v1/admin/instructors`,
+      https://logietestapi.herokuapp.com/api/v1/admin/instructors`,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,
@@ -60,7 +56,7 @@ function ActiveInstructors() {
     const data = await axios({
       url:
         `
-      http://localhost:3000/api/v1/admin/updateStatus/` + id,
+        https://logietestapi.herokuapp.com/api/v1/admin/updateStatus/` + id,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : undefined,
