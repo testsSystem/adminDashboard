@@ -42,7 +42,7 @@ function Basic() {
     const password = passwordRef.current.querySelector(
       "input[type=password]"
     ).value;
-    fetch(`${process.env.REACT_APP_API_URL}admins/login`, {
+    fetch(`${process.env.REACT_APP_API_URL}admin/login`, {
       method: "POST",
       body: JSON.stringify({
         email,

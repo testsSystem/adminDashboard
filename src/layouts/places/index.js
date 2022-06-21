@@ -21,31 +21,29 @@ const columns = [
 function Places() {
   const [rows, setRows] = useState([]);
   useEffect(() => {
-    fetch("https://logietestapi.herokuapp.com/api/v1/admin").then(
-      (response) => {
-        response.json().then((places) => {
-          const allPlaces = places.data.map((place) => {
-            return {
-              title: <>{place.firstName}</>,
-              Category: <>{place.lastName}</>,
-              // location: (
-              //   <>
-              //     <a
-              //       target="_blank"
-              //       rel="noreferrer"
-              //       href={`http://www.google.com/maps/@${place.latitude},${place.longitude},15z`}
-              //     >
-              //       Click Here
-              //     </a>
-              //   </>
-              // ),
-              actions: <>test</>,
-            };
-          });
-          setRows(allPlaces);
+    fetch("http://localhost:3000/api/v1/admin").then((response) => {
+      response.json().then((places) => {
+        const allPlaces = places.data.map((place) => {
+          return {
+            title: <>{place.firstName}</>,
+            Category: <>{place.lastName}</>,
+            // location: (
+            //   <>
+            //     <a
+            //       target="_blank"
+            //       rel="noreferrer"
+            //       href={`http://www.google.com/maps/@${place.latitude},${place.longitude},15z`}
+            //     >
+            //       Click Here
+            //     </a>
+            //   </>
+            // ),
+            actions: <>test</>,
+          };
         });
-      }
-    );
+        setRows(allPlaces);
+      });
+    });
   });
   return (
     <DashboardLayout>
